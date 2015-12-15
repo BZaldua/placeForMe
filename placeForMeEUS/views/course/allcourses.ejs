@@ -1,0 +1,54 @@
+<% if (action) { %>
+<script>
+  $(document).ready(function(){
+    alert('<%=editedCourse%> ondo aldatu da (<%=action%>)');
+  });
+</script>
+<% } %>
+	<div class="panel panel-default">
+		<div class="panel-heading">Irakasgai zerrenda</div>
+		<div class="panel-body">
+			<div class="row">
+				<a href="/course/new"><button class="btn btn-default" type="button">Gehitu irakasgaia</button></a>
+			</div><br>
+			<div class="table-responsive">
+				<table class="table tabel-striped">
+					<tr>
+						<th>Izena</th>
+						<th>Kredituak</th>
+						<th>Espezialitatea</th>
+						<th>Plaza kopurua</th>
+						<th>Ikasturtea</th>
+						<th>Lauhilekoa</th>
+						<th></th>
+						<th></th>
+					</tr>
+					<% var i; for (i=0; i < course.length; i++) { %>
+						<tr>
+							<td><%= course[i].name %></td>
+							<td><%= course[i].credits %></td>
+							<td><% if (course[i].specialisation=="IS") { %>
+									Software Ingeniaritza
+								<% }else if (course[i].specialisation=="IC") { %>
+									Konputagailuen Ingeniaritza
+								<% }else if (course[i].specialisation=="C") { %>
+									Konputazioa
+								<%}%>
+							</td>
+							<td><%= course[i].vacancies %></td>
+							<td><%= course[i].year %></td>
+							<td><%= course[i].semester %></td>
+							<td><a href="/course/<%= course[i].id %>/edit"><button class="btn btn-default">Irakasgaia editatu</button></a></td>
+							<td>
+								<form method="post" action="/course/<%= course[i].id %>?_method=delete">
+									<button class="btn btn-default" type="submit" onClick="return confirm('Borrar: <%= course[i].name %>');">
+									Ezabatu
+									</button>
+								</form>
+							</td>
+						</tr>
+					<% } %>
+				</table>
+			</div>
+		</div>
+	</div>

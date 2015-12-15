@@ -1,0 +1,87 @@
+<div class="panel panel-default">
+		<div class="panel-heading">Ikasle berria gehitu</div>
+		<div class="panel-body">
+			<div style="margin: 0% 30% 0% 30%">
+				<form method='post' action='/manager/createStudent/<%=user.id%>' onsubmit="return validar();" >
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 col-sm-4">
+							</div>
+							<div class="col-xs-12 col-sm-4">
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="name">Izena: </label>
+										</div>
+										<div class="col-md-6">
+											<input autofocus required class="form-control" type="text" name="name" placeholder="Izena" id="name" pattern="(^[a-zA-Z ñÑáéíóúÁÉÍÓÚ]{1,20}$)" data-toggle="tooltip" data-placement="right" title="Letrak bakarrik."/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="lastname">Abizena: </label>
+										</div>
+										<div class="col-md-6">
+											<input class="form-control" required type="text" name="lastname" id="lastname" placeholder="Abizena" pattern="(^[a-zA-Z ñÑáéíóúÁÉÍÓÚ]{1,20}$)" data-toggle="tooltip" data-placement="right" title="Letrak bakarrik."/>
+										</div>
+									</div>						
+									<div class="row">
+										<div class="col-md-6">
+											<label for="year1">Ikasturtea: </label>
+										</div>
+										<div class="col-md-6">
+											<select class="form-control" id="year" name="year">
+												<option value="3">3</option>
+												<option value="4">4</option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="nota">Bataz besteko nota: </label>
+										</div>
+										<div class="col-md-6">
+											<input required name="avg" id="avg" class="form-control" type="text" pattern="(^((\d\.\d[\d]?)|(10)(\.0)[0]?)$)" placeholder="Nota" data-toggle="tooltip" data-placement="right" title="0 eta 10 arteko zenbakia">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="credito">Kredituak: </label>
+										</div>
+										<div class="col-md-6">
+											<input required name="credits" id="credits" class="form-control" type="number" min="0" max="240" placeholder="Kredituak" data-toggle="tooltip" data-placement="right" title="0 eta 240 arteko kopurua">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="esp">Espezializazioa: </label>
+										</div>
+										<div class="col-md-6">
+											<select class="form-control" id="specialisation" name="specialisation">
+												<option value="C">Konputazioa</option>
+												<option value="IC">Konputagailuen ingeniaritza</option>
+												<option value="IS">Software ingeniaritza</option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="checkbox>
+					       					<label for="baldintzak">
+					       						<input type="checkbox" id="condiciones" name="condiciones" value="aceptado" required   />
+					       						Irakurri eta onartzen ditut <a href="/terms">baldintzak</a>.
+					   						</label>
+										</div>
+									</div>
+									<div class="row">
+										<input class="btn btn-default" type="submit"  value="Sortu"  />
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-4">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>

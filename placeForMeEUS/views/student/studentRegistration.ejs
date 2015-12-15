@@ -1,0 +1,119 @@
+	<div class="panel panel-default">
+		<div class="panel-heading">Erregistratu</div>
+		<div class="panel-body">
+			<div>
+				<form method='post' name="registro" id="registro" action='students' onsubmit="return validar();" >
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 col-sm-4">
+							</div>
+							<div class="col-xs-12 col-sm-4">
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="name">Izena: </label>
+										</div>
+										<div class="col-md-6">
+											<input autofocus required class="form-control" type="text" name="name" placeholder="Izena" id="name" value="<%= student.name %>" pattern="(^[a-zA-Z ñÑáéíóúÁÉÍÓÚ]{1,20}$)" data-toggle="tooltip" data-placement="right" title="Letrak bakarrik."/>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="lastname">Abizena: </label>
+										</div>
+										<div class="col-md-6">
+											<input class="form-control" required type="text" name="lastname" id="lastname" value="<%= student.surname %>" placeholder="Abizena" pattern="(^[a-zA-Z ñÑáéíóúÁÉÍÓÚ]{1,20}$)" data-toggle="tooltip" data-placement="right" title="Letrak bakarrik."/>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="email">Eposta: </label>
+										</div>
+										<div class="col-md-6">
+											<input class="form-control" required type="text" pattern="(^([a-zA-Z])+(\d{3})+\@ikasle.ehu.e(u)?s$)" placeholder="posta001@ikasle.ehu.eus" name="email" id="email" value="<%= user.email %>" data-toggle="tooltip" data-placement="right" title="EHUko ikasle-posta erabili."/>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="pass">Pasahitza: </label>
+										</div>
+										<div class="col-md-6">
+											<input class="form-control" required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="text" placeholder="Pasahitza" name="password" id="password" data-toggle="tooltip" data-placement="right" title="Gutxienez 8 karaktere, gutxienez letra larri bat, letra xehe bat eta zenbaki bat izan behar ditu."/>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="pass2">Errepikatu pasahitza: </label>
+										</div>
+										<div class="col-md-6">
+											<input class="form-control" required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="text" placeholder="Pasahitza berriro" name="password1" id="password1" data-toggle="tooltip" data-placement="right" title="Bi pasahitzek berdina izan behar dute."/>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="year1">Ikasturtea: </label>
+										</div>
+										<div class="col-md-6">
+											<input required name="year" id="year" value="<%= student.year %>" class="form-control" type="number" min="3" max="4" placeholder="Urtea" data-toggle="tooltip" data-placement="right" title="3 edo 4 ikasturtea izan behar du"/>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="nota">Bataz besteko nota: </label>
+										</div>
+										<div class="col-md-6">
+											<input required name="avg" id="avg" value="<%= student.avgGrade %>" class="form-control" type="text" placeholder="Nota media" data-toggle="tooltip" data-placement="right" title="0 eta 10 arteko zenbakia."/>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="credito">Kredituak: </label>
+										</div>
+										<div class="col-md-6">
+											<input required name="credits" id="credits" value="<%= student.credits %>" class="form-control" type="number" min="0" max="240" placeholder="Créditos" data-toggle="tooltip" data-placement="right" title="0 eta 240 arteko zenbakia.">
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="esp">Espezializazioa: </label>
+										</div>
+										<div class="col-md-6">
+											<select class="form-control" id="specialisation" name="specialisation">
+												<option value="C" <% if (student.specialisation === "C") { %> selected <% } %> >Konputazioa</option>
+												<option value="IC" <% if (student.specialisation === "IC") { %> selected <% } %> >Konputagailuen ingeniaritza</option>
+												<option value="IS" <% if (student.specialisation === "IS") { %> selected <% } %> >Software ingeniaritza</option>
+											</select>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="checkbox">
+					       					<label for="condiciones">
+					       						<input type="checkbox" id="condiciones" name="condiciones" value="aceptado" required   />
+					       						Irakurri eta onartzen ditut <a href="/terms">baldintzak</a>.
+					   						</label>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<input class="btn btn-default" type="submit"  value="Erregistratu"  />
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-4">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>

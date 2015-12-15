@@ -1,0 +1,85 @@
+	<div class="panel panel-default">
+		<div class="panel-heading">Irakasgaia editatu (ID: <%= course.id %>)</div>
+		<div class="panel-body">
+			<div style="margin: 0% 30% 0% 30%">
+				<form method="post" action="/course/<%= course.id %>?_method=put">
+					<div class="row">
+						<div class="col-md-6">
+							<label for="name">Izena: <span class="required">*</span></label>
+						</div>
+						<div class="col-md-6">
+							<input class="form-control" type="text" id="name" name="course[name]" pattern="(^[a-zA-Z ñÑáéíóúÁÉÍÓÚ. \d]+$)" value="<%= course.name %>" required="required" autofocus="autofocus" data-toggle="tooltip" data-placement="right" title="Letra, zenbaki eta puntuak."/>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="creditos">Kreditu kopurua: <span class="required">*</span></label>
+						</div>
+						<div class="col-md-6">
+							<input class="form-control" type="number" id="creditos" name="course[credits]" value="<%= course.credits %>" required="required" data-toggle="tooltip" data-placement="right" title="Zenbaki osoa"/>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="especialidad">Espezialitatea: </label>
+						</div>
+						<div class="col-md-6">
+							<select id="especialidad" class="form-control" name="course[specialisation]">
+								<option value="C" <% if (course.specialisation === "C") { %> selected <% } %> >Konputazioa</option>
+								<option value="IC" <% if (course.specialisation === "IC") { %> selected <% } %> >Konputagailuen ingeniaritza</option>
+								<option value="IS" <% if (course.specialisation === "IS") { %> selected <% } %> >Software Ingeniaritza</option>
+							</select>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="plazas">Plaza kopurua: <span class="required">*</span></label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" id="plazas" class="form-control" name="course[vacancies]" value="<%= course.vacancies %>" required="required" autofocus="autofocus" data-toggle="tooltip" data-placement="right" title="Zenbaki osoa"/>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="descripcion">Deskribapena: <span class="required">*</span></label>
+						</div>
+						<div class="col-md-6">
+							<textarea id="descripcion" name="course[description]" class="form-control"  required="required" data-toggle="tooltip" data-placement="right" title="255 karaktere gehienez"><%= course.description %></textarea>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="curso">Ikasturtea:</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" id="year" name="course[year]">
+								<option value="3º" <% if (course.year === "3º") { %> selected <% } %> >3</option>
+								<option value="4º" <% if (course.year === "4º") { %> selected <% } %> >4</option>
+							</select>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="curso">Lauhilekoa:</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" id="semester" name="course[semester]">
+								<option value="1º" <% if (course.semester === "1º") { %> selected <% } %> >1</option>
+								<option value="2º" <% if (course.semester === "2º") { %> selected <% } %> >2</option>
+							</select>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<input class="btn btn-default" type="submit" value="Gorde" id="submit" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>

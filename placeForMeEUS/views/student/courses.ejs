@@ -1,0 +1,399 @@
+
+<div class="row">
+	<div class="bg-info"><br>
+		<p>Hemen datorren ikasturtean egin nahi dituzun irakasgaiak ikus ditzakezu.</p>
+		<p>Behin hautatuta, kolorez aldatuko dute: berdea, plazaren bat eskuragarri badago eta, gorria, plaza guztiak okupaturik badaude.</p>
+		<p>Honela, ea irakasgaitako eskaera zein den jakin ahal izango duzu.</p>
+		<p>Gero eta ikasle gehiagok parte hartu, orduan eta informazio hobea izango dugu.</p>
+		<p><strong>OHARRA:</strong> Irakurri <a href="http://www.ehu.eus/documents/340468/4166549/ORD-bateragarritasuna-15-16.pdf" target="_blank">bateragarritasun taula</a> zure hautaketak egin aurretik.</p>
+		<br>
+	</div>
+</div>
+<div class="table-responsive">
+	<table class="table">
+	
+	
+	<% var hirugarren = new Array(); 
+		var laugarren = new Array();
+		var lehenLau = new Array();
+		var bigarrenLau = new Array();
+		var software1 = new Array();
+		var compu1 = new Array();
+		var hard1 = new Array();
+		var software2 = new Array();
+		var compu2 = new Array();
+		var hard2 = new Array();
+		var lag = 0%>
+		
+		<!-- Separando por cursos -->
+	<% for (var i = 0; i < courses.length; i++){ %>
+		<%if(courses[i].year.substring(0,1) == "3"){ %>
+			<%hirugarren[i] = courses[i];%>
+		<%}else{%>
+			<%laugarren[lag] = courses[i]; lag++ %>
+		<%}%>
+	<%}%>
+	
+	<!-- Separando por cuatri 3º-->
+	<%lag=0;%>
+	<%for (var i = 0; i < hirugarren.length; i++){ %>
+		<% if (hirugarren[i].semester.substring(0,1)== 1){%>
+			<%lehenLau[i] = hirugarren[i]; %>
+		<%}else{%>
+			<%bigarrenLau[lag]=hirugarren[i];lag++;%>
+		<%}%>
+	<%}%>
+
+	<!-- Separando por especialidad 1º cuatri -->
+	<%lag=0; var lag2=0; var lag3=0;%>
+	<%for (var i = 0; i < lehenLau.length; i++){ %>
+		<% if (lehenLau[i].specialisation == "IS"){%>
+			<%software1[lag] = lehenLau[i];lag++; %>
+		<%}else if (lehenLau[i].specialisation == "IC"){%>
+			<%compu1[lag2]=lehenLau[i];lag2++ ;%>
+		<%}else{%>
+			<%hard1[lag3] = lehenLau[i];lag3++; %>
+		<%}%>
+	<%}%>
+	
+	<!-- Separando por especialidad 2º cuatri -->
+	<%lag=0; var lag2=0; var lag3=0;%>
+	<%for (var i = 0; i < bigarrenLau.length; i++){ %>
+		<% if (bigarrenLau[i].specialisation == "IS"){%>
+			<%software2[lag] = bigarrenLau[i];lag++; %>
+		<%}else if (bigarrenLau[i].specialisation == "IC"){%>
+			<%compu2[lag2]=bigarrenLau[i];lag2++ ;%>
+		<%}else{%>
+			<%hard2[lag3] = bigarrenLau[i];lag3++; %>
+		<%}%>
+	<%}%>
+			
+	<h3> 3 ikasturtea </h3>
+	<table style = "width:90%;">
+		<tr style ="background-color:#1F5B83;color:white;">
+			<td colspan ="2" style = "text-align:center;margin-bottom:10px;"><b>Lehen lauhilekoa</b></td>
+			<td colspan ="2" style = "text-align:center;padding-bottom:10px;"><b>Bigarren lauhilekoa</b></td>
+		</tr>
+		<tr style ="background-color:#A5BDCD">
+			<td colspan ="2" style = "text-align:center;"><b>Software ingeniaritza</b></td>
+			<td colspan ="2" style = "text-align:center"><b>Software ingeniaritza</b></td>
+		<tr>
+		<%for(var i=0;i<software2.length;i++){%>
+			<tr>
+				<td  style=" padding-right: 20px;" id = "<%= software1[i].id%>" class="
+			<%for(var c = 0; c < userCourses.length; c++){
+				if(userCourses[c].CourseId== software1[i].id && software1[i].vacancies > 0){
+					%>alert-success<%
+				}else if(software1[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(software1[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=software1[i].description%></td>
+				<td  style=" padding-right: 20px;">
+					<button type ="button" value ="Matricularse" id="<%= software1[i].id%>_button" class ="btn btn-default"
+					
+						<% 
+						var esta = false;
+						var pos = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== software1[i].id){
+							esta = true;
+							pos = c;
+						}%>
+					
+					
+					
+				<%if (esta) { %>
+						onclick="('<%= software1[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= software1[i].id %>')">Seleccionar
+					<% } %></td>
+
+
+					</button>
+				</td>
+				<td  style=" padding-right: 20px;" id = "<%= software2[i].id%>" class="
+				<%for(var c = 0; c < userCourses.length; c++){
+						if(userCourses[c].CourseId== software2[i].id){
+						
+							%>alert-success<%
+						}else if(software2[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(software2[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=software2[i].description %></td>
+				<td  style=" padding-right: 20px;">
+				<button type ="button" value ="Matricularse" id="<%= software2[i].id%>_button" class="btn btn-default"
+				<% 
+						var esta2 = false;
+						var pos2 = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== software2[i].id){
+							esta2 = true;
+							pos2 = c;
+						}%>
+					
+					
+					
+				<%if (esta2) { %>
+						onclick="('<%= software2[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= software2[i].id %>')">Seleccionar
+					<% } %></td>
+
+					</button></td>
+			</tr>
+		<%}%>
+		
+		<tr style ="background-color:#A5BDCD">
+			<td colspan ="2" style = "text-align:center;margin-bottom:10px;"><b>Konputazioa</b></td>
+			<td colspan ="2" style = "text-align:center;margin-bottom:10px;"><b>Konputazioa</b></td>
+		</tr>
+				<%for(var i=0;i<hard1.length;i++){%>
+			<tr>
+				<td  style=" padding-right: 20px;" id = "<%= hard1[i].id%>" class="
+			<%for(var c = 0; c < userCourses.length; c++){
+						if(userCourses[c].CourseId== hard1[i].id){
+						
+							%>alert-success<%
+						}else if(hard1[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(hard1[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=hard1[i].description%></td>
+				<td  style=" padding-right: 20px;">
+				<button type ="button" value ="Matricularse" id="<%= hard1[i].id%>_button" class ="btn btn-default"
+					
+						<% 
+						var esta = false;
+						var pos = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== hard1[i].id){
+							esta = true;
+							pos = c;
+						}%>
+					
+					
+					
+				<%if (esta) { %>
+						onclick="('<%= hard1[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= hard1[i].id %>')">Seleccionar
+					<% } %></td>
+
+					</button></td>
+				<td  style=" padding-right: 20px;" id = "<%= hard2[i].id%>" class="
+			<%for(var c = 0; c < userCourses.length; c++){
+						if(userCourses[c].CourseId== hard2[i].id){
+						
+							%>alert-success<%
+						}else if(hard2[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(hard2[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=hard2[i].description %></td>
+				<td  style=" padding-right: 20px;">
+				<button type ="button" value ="Matricularse" id="<%= hard2[i].id%>_button" class="btn btn-default"
+				<% 
+						var esta2 = false;
+						var pos2 = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== hard2[i].id){
+							esta2 = true;
+							pos2 = c;
+						}%>
+						
+					
+				<%if (esta2) { %>
+						onclick="('<%= hard2[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= hard2[i].id %>')">Seleccionar
+					<% } %></td>
+
+					</button></td>
+			</tr>
+		<%}%>
+
+		<tr style ="background-color:#A5BDCD">
+			<td colspan ="2" style = "text-align:center;margin-bottom:10px;"><b>Konputagailuen ingeniaritza</b></td>
+			<td colspan ="2" style = "text-align:center;margin-bottom:10px;"><b>Konputagailuen ingeniaritza</b></td>
+		</tr>
+		<%for(var i=0;i<compu2.length;i++){%>
+			<tr>
+				<td  style=" padding-right: 20px;" id = "<%= compu1[i].id%>"  class="
+			<%for(var c = 0; c < userCourses.length; c++){
+						if(userCourses[c].CourseId== compu1[i].id){
+						
+							%>alert-success<%
+						}else if(compu1[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(compu1[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=compu1[i].description%></td>
+				<td  style=" padding-right: 20px;">
+				<button type ="button" value ="Matricularse" id="<%= compu1[i].id%>_button" class ="btn btn-default"
+					
+						<% 
+						var esta = false;
+						var pos = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== compu1[i].id){
+							esta = true;
+							pos = c;
+						}%>
+					
+					
+					
+				<%if (esta) { %>
+						onclick="('<%= compu1[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= compu1[i].id %>')">Seleccionar
+					<% } %></td>
+
+					</button></td>
+				<td  style=" padding-right: 20px;" id = "<%= compu2[i].id%>" class="
+			<%for(var c = 0; c < userCourses.length; c++){
+						if(userCourses[c].CourseId== compu2[i].id){
+						
+							%>alert-success<%
+						}else if(compu2[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(compu2[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=compu2[i].description %></td>
+				<td  style=" padding-right: 20px;">
+				<button type ="button" value ="Matricularse" id="<%= compu2[i].id%>_button" class="btn btn-default"
+				<% 
+						var esta2 = false;
+						var pos2 = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== compu2[i].id){
+							esta2 = true;
+							pos2 = c;
+						}%>
+					
+					
+					
+				<%if (esta2) { %>
+						onclick="('<%= compu2[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= compu2[i].id %>')">Seleccionar
+					<% } %></td>
+
+					</button></td>
+			</tr>
+		<%}%>
+	</table> 
+	
+	
+	<h3> 4 ikasturtea </h3>
+	<%lag=0;%>
+	<%for (var i = 0; i < laugarren.length; i++){ %>
+		<% if (laugarren[i].semester.substring(0,1)== 1){%>
+			<%lehenLau[i] = laugarren[i]; %>
+		<%}else{%>
+			<%bigarrenLau[lag]=laugarren[i];lag++;%>
+		<%}%>
+	<%}%>
+<table style = "width:90%;">
+			<tr style ="background-color:#1F5B83;color:white;">
+			<td colspan ="2" style = "text-align:center;margin-bottom:10px;"><b>Lehen lauhilekoa</b></td>
+			<td colspan ="2" style = "text-align:center;margin-bottom:10px;"><b>Bigarren lauhilekoa</b></td>
+		</tr>
+		<%for(var i=0;i<lehenLau.length;i++){%>
+			<tr>
+				<td  style=" padding-right: 20px;" id = "<%= lehenLau[i].id%>"  class="
+			<%for(var c = 0; c < userCourses.length; c++){
+						if(userCourses[c].CourseId== lehenLau[i].id){
+						
+							%>alert-success<%
+						}else if(lehenLau[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(lehenLau[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=lehenLau[i].description%></td>
+				<td  style=" padding-right: 20px;">
+				<button type ="button" value ="Matricularse" id="<%= lehenLau[i].id%>_button" class ="btn btn-default"
+					
+						<% 
+						var esta = false;
+						var pos = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== lehenLau[i].id){
+							esta = true;
+							pos = c;
+						}%>
+					
+					
+					
+				<%if (esta) { %>
+						onclick="('<%= lehenLau[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= lehenLau[i].id %>')">Seleccionar
+					<% } %></td>
+
+					</button></td>
+				<td  style=" padding-right: 20px;" id = "<%= bigarrenLau[i].id%>" class="
+			<%for(var c = 0; c < userCourses.length; c++){
+						if(userCourses[c].CourseId== bigarrenLau[i].id){
+						
+							%>alert-success<%
+						}else if(bigarrenLau[i].vacancies <= 0){
+					%>alert-danger
+				<% }%>
+			<% }%>
+			<%if(bigarrenLau[i].vacancies <= 0) {%>
+				alert-danger
+			<%}%>
+				"><%=bigarrenLau[i].description %></td>
+				<td  style=" padding-right: 20px;">
+				<button type ="button" value ="Matricularse" id="<%= bigarrenLau[i].id%>_button" class="btn btn-default"
+				<% 
+						var esta2 = false;
+						var pos2 = 0;
+						var c;
+						for(c = 0; c < userCourses.length; c++)
+						if(userCourses[c].CourseId== bigarrenLau[i].id){
+							esta2 = true;
+							pos2 = c;
+						}%>
+					
+				<%if (esta2) { %>
+						onclick="('<%= bigarrenLau[i].id %>')">Descartar
+					<% } else { %>
+						onclick="selectCourse('<%= bigarrenLau[i].id %>')">Seleccionar
+					<% } %></td>
+
+					</button></td>
+			</tr>
+		<%}%>
+</table>
+</div>
